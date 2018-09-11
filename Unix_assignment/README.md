@@ -21,7 +21,7 @@ tail -n 2 snp_position.txt > snp_position.tail.txt
 cat snp_position.tail.txt
 
 ```
-* looking at the size of the files
+* Looking at the number of lines, words and characters of the files
 
 ```
 wc fang_et_al_genotypes.txt > fang_et_al_genotypes.wc.txt
@@ -30,7 +30,16 @@ cat fang_et_al_genotypes.wc.txt
 wc snp_position.txt > snp_position.wc.txt
 cat snp_position.wc.txt
 ```
+* Looking at the file size of the files
 
+```
+ls -lh fang_et_al_genotypes.txt
+du -h fang_et_al_genotypes.txt
+
+ls -lh snp_position.txt
+du -h snp_position.txt
+
+```
 
 ## Data Processing
 
