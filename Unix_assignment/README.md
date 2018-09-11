@@ -28,8 +28,9 @@ wc fang_et_al_genotypes.txt > fang_et_al_genotypes.wc.txt
 cat fang_et_al_genotypes.wc.txt
 
 wc snp_position.txt > snp_position.wc.txt
-cat snp_position
+cat snp_position.wc.txt
 ```
+
 
 ## Data Processing
 
