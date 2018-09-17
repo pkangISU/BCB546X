@@ -109,7 +109,7 @@ $ sort -k 1 matched_transposed_teosinte_genotype.txt > sorted_matched_transposed
 * Getting rid of the header of snp_position.txt to match the transposed maize and teosinte files
 
 ```
-$ tail -n +2 
+$ tail -n +2 snp_position.txt > matched_snp_position.txt
 
 ```
 
@@ -117,7 +117,7 @@ $ tail -n +2
 * Extracting column 1 (SNP_ID), column 3 (chromosome) and column 4 (position) from snp_position files to a new file
 
 ```
-
+$ cut -f 1,3,4 matched_snp_position.txt > matched_3column_snp_position.txt
 
 ```
 
@@ -125,7 +125,7 @@ $ tail -n +2
 * Sorting the new file
 
 ```
-
+$ sort -k 1 matched_3column_snp_position.txt > sorted_matched_3column_snp_position.txt
 
 ```
 
@@ -133,7 +133,9 @@ $ tail -n +2
 * Joining maize or teosinte files with new snp file, snp files first
 
 ```
+$ join -1 1 -2 1 sorted_matched_3column_snp_position.txt sorted_matched_transposed_maize_genotype.txt > joined_maize_genotype.txt
 
+$ join -1 1 -2 1 sorted_matched_3column_snp_position.txt sorted_matched_transposed_teosinte_genotype.txt > joined_teosinte_genotype.txt
 
 ```
 
@@ -141,33 +143,76 @@ $ tail -n +2
 * Extracting chromosome 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, unknown and multiple respectively to a new file from maize and teosinte files
 
 ```
+$ awk '$2 == 1' joined_maize_genotype.txt | sort -V -k 3 > chr1_increasing_position_maize_genotype
 
+$ awk '$2 == 2' joined_maize_genotype.txt | sort -V -k 3 > chr2_increasing_position_maize_genotype
 
+$ awk '$2 == 3' joined_maize_genotype.txt | sort -V -k 3 > chr3_increasing_position_maize_genotype
+
+$ awk '$2 == 4' joined_maize_genotype.txt | sort -V -k 3 > chr4_increasing_position_maize_genotype
+
+$ awk '$2 == 5' joined_maize_genotype.txt | sort -V -k 3 > chr5_increasing_position_maize_genotype
+
+$ awk '$2 == 6' joined_maize_genotype.txt | sort -V -k 3 > chr6_increasing_position_maize_genotype
+
+$ awk '$2 == 7' joined_maize_genotype.txt | sort -V -k 3 > chr7_increasing_position_maize_genotype
+
+$ awk '$2 == 8' joined_maize_genotype.txt | sort -V -k 3 > chr8_increasing_position_maize_genotype
+
+$ awk '$2 == 9' joined_maize_genotype.txt | sort -V -k 3 > chr9_increasing_position_maize_genotype
+
+$ awk '$2 == 10' joined_maize_genotype.txt | sort -V -k 3 > chr10_increasing_position_maize_genotype
+
+$ awk '$2 == "unknown"' joined_maize_genotype.txt | sort -V -k 3 > chr_unknown_increasing_position_maize_genotype
+
+$ awk '$2 == "multiple"' joined_maize_genotype.txt | sort -V -k 3 > chr_multiple_increasing_position_maize_genotype
 ```
 
   
 * Sorting each chromosome file by increasing position (column 3)
 
 ```
+$ awk '$2 == 1' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr1_decreasing_position_maize_genotype
+
+$ awk '$2 == 2' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr2_decreasing_position_maize_genotype
+
+$ awk '$2 == 3' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr3_decreasing_position_maize_genotype
+
+$ awk '$2 == 4' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr4_decreasing_position_maize_genotype
+
+$ awk '$2 == 5' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr5_decreasing_position_maize_genotype
+
+$ awk '$2 == 6' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr6_decreasing_position_maize_genotype
+
+$ awk '$2 == 7' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr7_decreasing_position_maize_genotype
+
+$ awk '$2 == 8' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr8_decreasing_position_maize_genotype
+
+$ awk '$2 == 9' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr9_decreasing_position_maize_genotype
+
+$ awk '$2 == 10' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr10_decreasing_position_maize_genotype
+
+$ awk '$2 == "unknown"' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr_unknown_decreasing_position_maize_genotype
+
+$ awk '$2 == "multiple"' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/?/-/g' > chr_multiple_decreasing_position_maize_genotype
 
 
 ```
 
 
-* Sorting each chromosome file by decreasing position (column 3)
+* Checking the order on position(column 3) for each chromosome file and missing value
 
+```
+$ awk -F " " '{print $3}' *_position_maize_genotype.txt | head -n 20
+
+$ awk -F " " '{print $3}' *_position_maize_genotype.txt | tail -n 20
+
+$ awk -F " " '{print $3}' *_position_teosinte_genotype.txt | head -n 20
+
+$ awk -F " " '{print $3}' *_position_teosinte_genotype.txt | tail -n 20
 ```
 
 
-```
-
-
-* Replacing "?" with "-" for each decreasing position chromosome file
-
-```
-
-
-```
 
 
  
