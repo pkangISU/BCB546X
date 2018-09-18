@@ -95,7 +95,7 @@ $ tail -n +4 tansposed_teosinte_genotype.txt > matched_transposed_teosinte_genot
 ```
 
 
-* Sorting maized and teosinte by column 1 (SNP_ID)
+* Sorting maize and teosinte by column 1 (SNP_ID)
 
 ```
 $ sort -k 1 matched_transposed_maize_genotype.txt > sorted_matched_transposed_maize_genotype.txt
