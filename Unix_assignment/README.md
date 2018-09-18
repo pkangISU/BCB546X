@@ -17,6 +17,7 @@ $ tail -n 2 snp_position.txt
 
 
 ```
+
 * Looking at the number of lines, words and characters of the files
 
 ```
@@ -24,6 +25,7 @@ $ wc fang_et_al_genotypes.txt
 
 $ wc snp_position.txt 
 ```
+
 * Looking at the file size of the files
 
 ```
@@ -40,9 +42,9 @@ $ du -h snp_position.txt
 * Extracting maize or teosinte files from fang_et_al_genotypes.txt
 
 ```
-$ grep -i "ZMMIL,ZMMLR, ZMMMR" fang_et_al_genotypes.txt > teosinte_genotype.txt
+$ grep -E "ZMMIL|ZMMLR|ZMMMR" fang_et_al_genotypes.txt > maize_genotype.txt
 
-$ grep -i "ZMPBA,ZMPIL, ZMPJA" fang_et_al_genotypes.txt > teosinte_genotype.txt
+$ grep -E "ZMPBA|ZMPIL|ZMPJA" fang_et_al_genotypes.txt > teosinte_genotype.txt
 
 ```
 
@@ -203,13 +205,14 @@ $ awk '$2 == "multiple"' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/
 * Checking the order on position(column 3) for each chromosome file and missing value
 
 ```
-$ awk -F " " '{print $3}' *_position_maize_genotype.txt | head -n 20
+$ cut -f 3 *_position_maize_genotype.txt | head -n 20
 
-$ awk -F " " '{print $3}' *_position_maize_genotype.txt | tail -n 20
+$ cut -f 3 *_position_maize_genotype.txt | tail -n 20
 
-$ awk -F " " '{print $3}' *_position_teosinte_genotype.txt | head -n 20
+$ cut -f 3 *_position_teosinte_genotype.txt | head -n 20
 
-$ awk -F " " '{print $3}' *_position_teosinte_genotype.txt | tail -n 20
+$ cut -f 3 *_position_teosinte_genotype.txt | tail -n 20
+
 ```
 
 
