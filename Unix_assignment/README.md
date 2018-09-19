@@ -48,11 +48,26 @@ $ grep -E "ZMPBA|ZMPIL|ZMPJA" fang_et_al_genotypes.txt > teosinte_genotype.txt
 
 ```
 
+* Checking the number of lines in maize or teosinte genotype files to make sure grep command worked.
+
+```
+$ wc -l maize_genotype.txt
+$ wc -l teosinte_genotype.txt
+
+```
+
 * Extracting header line from fang_et_al_genotypes.txt
 
 
 ```
 $ head -n 1 fang_et_al_genotypes.txt > header_genotype.txt
+
+```
+
+* Checking the number of lines in header file to make sure the command worked
+
+```
+$ wc -l header_genotype.txt
 
 ```
 
@@ -66,6 +81,15 @@ $ cat header_genotype.txt teosinte_genotype.txt > teosinte_header_genotype.txt
 
 ```
 
+* Checking the number of lines of each file to make sure that command worked
+
+```
+$ wc -l maize_header_genotype.txt
+
+$ wc -l teosinte_header_genotype.txt
+
+```
+
 
 * Transposing maize and teosinte files from columns to rows
 
@@ -74,6 +98,14 @@ $ awk -f transpose.awk maize_header_genotype.txt > transposed_maize_genotype.txt
 
 $ awk -f transpose.awk teosinte_header_genotype.txt > transposed_teosinte_genotype.txt
 
+```
+
+* Checking the 1st column to see if the file is transposed
+
+```
+$ cut -f 1 transposed_maize_genotype.txt| head -n 10 
+
+$ cut -f 1 transposed_teosinte_genotype.txt| head -n 10
 ```
 
 
@@ -90,21 +122,40 @@ $ wc -l transposed_teosinte_genotype.txt
 * Getting rid of the first three lines of the transposed maize and teosinte files
 
 ```
-$ tail -n +4 tansposed_maize_genotype.txt > matched_transposed_maize_genotype.txt
+$ tail -n +4 transposed_maize_genotype.txt > matched_transposed_maize_genotype.txt
 
-$ tail -n +4 tansposed_teosinte_genotype.txt > matched_transposed_teosinte_genotype.txt
+$ tail -n +4 transposed_teosinte_genotype.txt > matched_transposed_teosinte_genotype.txt
 
+```
+
+* Checking the number of lines 
+
+```
+$ wc -l matched_transposed_maize_genotype.txt
+
+$ wc -l matched_transposed_teosinte_genotype.txt
 ```
 
 
 * Sorting maize and teosinte by column 1 (SNP_ID)
 
 ```
-$ sort -k 1 matched_transposed_maize_genotype.txt > sorted_matched_transposed_maize_genotype.txt
+$ sort -t -c -k 1 matched_transposed_maize_genotype.txt > sorted_matched_transposed_maize_genotype.txt
 
 $ sort -k 1 matched_transposed_teosinte_genotype.txt > sorted_matched_transposed_teosinte_genotype.txt
 
+```
 
+* Checking the first column of sorted files
+
+```
+$ cut -f 1 sorted_matched_transposed_maize_genotype.txt |head -n 10
+
+$ cut -f 1 sorted_matched_transposed_maize_genotype.txt |tail -n 10
+
+$ cut -f 1 sorted_matched_transposed_teosinte_genotype.txt |head -n 10
+
+$ cut -f 1 sorted_matched_transposed_teosinte_genotype.txt |tail -n 10
 ```
 
 * Checking the number of lines of snp_position.txt
@@ -123,6 +174,12 @@ $ tail -n +2 snp_position.txt > matched_snp_position.txt
 
 ```
 
+* Checking the number of lines of matched_snp_position.txt
+
+```
+$ wc -l matched_snp_position.txt
+
+```
 
 * Extracting column 1 (SNP_ID), column 3 (chromosome) and column 4 (position) from snp_position files to a new file
 
@@ -139,6 +196,13 @@ $ sort -k 1 matched_3column_snp_position.txt > sorted_matched_3column_snp_positi
 
 ```
 
+* Checking the first column of snp file to make sure it matched the sorted maize or teosinte files
+
+```
+$ cut -f 1 sorted_matched_3column_snp_position.txt |head -n 10
+
+$ cut -f 1 sorted_matched_3column_snp_position.txt |tail -n 10
+```
 
 * Joining maize or teosinte files with new snp file, snp files first
 
@@ -146,6 +210,14 @@ $ sort -k 1 matched_3column_snp_position.txt > sorted_matched_3column_snp_positi
 $ join -1 1 -2 1 sorted_matched_3column_snp_position.txt sorted_matched_transposed_maize_genotype.txt > joined_maize_genotype.txt
 
 $ join -1 1 -2 1 sorted_matched_3column_snp_position.txt sorted_matched_transposed_teosinte_genotype.txt > joined_teosinte_genotype.txt
+
+```
+* Checking the number of lines in joined files
+
+```
+$ wc -l joined_maize_genotype.txt
+
+$ wc -l joined_teosinte_genotype.txt
 
 ```
 
@@ -271,13 +343,13 @@ $ awk '$2 == "multiple"' joined_teosinte_genotype.txt | sort -V -r -k 3 |sed -e 
 * Checking the order on position(column 3) for each chromosome file and missing value
 
 ```
-$ cut -f 3 *_increasing_position_maize_genotype.txt | head -n 20
+$ awk -F " " '{print $3}' chr1_increasing_position_maize_genotype |head -n 10
 
-$ cut -f 3 *_decreasing_position_maize_genotype.txt | tail -n 20
+$ awk -F " " '{print $3}' chr1_decreasing_position_maize_genotype |head -n 10
 
-$ cut -f 3 *_increasing_position_teosinte_genotype.txt | head -n 20
+$ awk -F " " '{print $3}' chr1_increasing_position_teosinte_genotype |head -n 10
 
-$ cut -f 3 *_decreasing_position_teosinte_genotype.txt | tail -n 20
+$ awk -F " " '{print $3}' chr1_decreasing_position_teosinte_genotype |head -n 10
 
 ```
 
