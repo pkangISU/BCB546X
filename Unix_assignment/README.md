@@ -213,13 +213,13 @@ $ awk '$2 == "multiple"' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/
 * Checking the order on position(column 3) for each chromosome file and missing value
 
 ```
-$ cut -f 3 *_position_maize_genotype.txt | head -n 20
+$ cut -f 3 *_increasing_position_maize_genotype.txt | head -n 20
 
-$ cut -f 3 *_position_maize_genotype.txt | tail -n 20
+$ cut -f 3 *_decreasing_position_maize_genotype.txt | tail -n 20
 
-$ cut -f 3 *_position_teosinte_genotype.txt | head -n 20
+$ cut -f 3 *_increasing_position_teosinte_genotype.txt | head -n 20
 
-$ cut -f 3 *_position_teosinte_genotype.txt | tail -n 20
+$ cut -f 3 *_decreasing_position_teosinte_genotype.txt | tail -n 20
 
 ```
 
