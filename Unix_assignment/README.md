@@ -209,7 +209,7 @@ $ awk '$2 == "multiple"' joined_maize_genotype.txt | sort -V -r -k 3 |sed -e 's/
 
 ```
 
-* Extracting chromosome 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, unknown and multiple respectively to a new file teosinte files
+* Extracting chromosome 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, unknown and multiple respectively to a new file from teosinte files
 
 ```
 $ awk '$2 == 1' joined_teosinte_genotype.txt | sort -V -k 3 > chr1_increasing_position_teosinte_genotype
