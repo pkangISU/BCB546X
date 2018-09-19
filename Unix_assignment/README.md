@@ -107,8 +107,16 @@ $ sort -k 1 matched_transposed_teosinte_genotype.txt > sorted_matched_transposed
 
 ```
 
+* Checking the number of lines of snp_position.txt
 
-* Getting rid of the header of snp_position.txt to match the transposed maize and teosinte files
+```
+$ wc -l snp_position.txt
+
+```
+
+
+
+* Getting rid of the header of snp_position.txt to match the lines of the transposed maize and teosinte files
 
 ```
 $ tail -n +2 snp_position.txt > matched_snp_position.txt
